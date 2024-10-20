@@ -8,7 +8,7 @@ from playwright.sync_api import sync_playwright
 
 # 设置 PushPlus 的 Token 和发送请求的 URL
 PUSHPLUS_TOKEN = os.environ.get("PUSHTOKEN")
-url_pushplus = 'http://www.pushplus.plus/send'
+url_pushplus = 'https://sct.ftqq.com'
 
 # 用户名和密码从环境变量中获取
 USERNAME = os.environ.get("USERNAME")
