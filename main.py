@@ -66,12 +66,13 @@ class LinuxDoBrowser:
             if not new_topics:
                 print("没有加载出更多帖子。")
                 break
-
+            
             for topic in new_topics:
                 if total_count >= max_browse_count:
                     break
 
                 page = self.context.new_page()
+                print("正在前往::" + urljoin(HOME_URL, topic.get_attribute("href")))
                 try:
                     page.goto(HOME_URL + topic.get_attribute("href"), timeout=60000, wait_until="domcontentloaded")
                 except TimeoutError:
