@@ -72,7 +72,7 @@ class LinuxDoBrowser:
                     break
 
                 page = self.context.new_page()
-                page.goto(HOME_URL + topic.get_attribute("href"))
+                page.goto(HOME_URL + topic.get_attribute("href"), timeout=60000, wait_until="domcontentloaded")
                 time.sleep(3)
                 
                 if random.random() < 0.02:  # 保持 2% 点赞几率
