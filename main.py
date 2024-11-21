@@ -47,7 +47,7 @@ class LinuxDoBrowser:
         time.sleep(2)  # 等待加载新内容
 
     def click_topic(self):
-        max_browse_count = 500  # 希望浏览的帖子数
+        max_browse_count = 5000  # 希望浏览的帖子数
         browsed_topics = []  # 存储浏览的帖子
         total_count = 0
 
@@ -72,7 +72,12 @@ class LinuxDoBrowser:
                     break
 
                 page = self.context.new_page()
-                page.goto(HOME_URL + topic.get_attribute("href"), timeout=60000, wait_until="domcontentloaded")
+                try:
+                    page.goto(HOME_URL + topic.get_attribute("href"), timeout=60000, wait_until="domcontentloaded")
+                except TimeoutError:
+                    print("Timeout when loading page, skip this topic." + urljoin(HOME_URL, topic.get_attribute("href")))
+                    page.close()  # 关闭当前页面
+                    continue  # 跳过当前循环，处理下一个帖子
                 time.sleep(3)
                 
                 if random.random() < 0.02:  # 保持 2% 点赞几率
